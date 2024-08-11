@@ -239,9 +239,9 @@ let:Block-scoped, resulting in each setTimeout callback having its own i variabl
 
 //! question-10 parameters vs arguments
 
-// function squar(num) { //Parameters -value that receive
+// function squar(num) { //?Parameters -value that receive
 //     console.log(num*num)
 // }
-// squar(5); //Arguments- value that passes
+// squar(5); //?Arguments- value that passes
 
 //! ts.=14:00 min
