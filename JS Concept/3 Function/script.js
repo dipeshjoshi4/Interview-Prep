@@ -2,41 +2,6 @@
 console.log("Function");
 
 
-//! Function Notes
-/*
-Question 1: Function Code
-Explanation: This code defines a function square that calculates the square of a number and a function displaySquare that logs the square of 5 using the square function.
-
-Question 2: What is IIFE?
-Explanation: IIFE stands for Immediately Invoked Function Expression. It is a function that is executed immediately after it is defined. Example 1 shows a simple IIFE, while Example 2 demonstrates an IIFE with nested functions.
-
-Question 3: Closure
-Explanation: The code demonstrates closure where the inner function displayName has access to the variable name defined in the outer function init.
-
-Question 4: Function Scope
-Explanation: This code showcases function scope and variable shadowing. In Q-1, the mul function uses the variables num1 and num2 from the global scope. In Q-2, the setTimeout function inside a loop creates a closure but uses the global i variable.
-
-Question 5: Function Hoisting
-Explanation: Function hoisting allows calling a function before it is declared. The code demonstrates hoisting with a function declaration and how it behaves differently from non-hoisted functions.
-
-Question 6: Params vs. Arguments
-Explanation: This code defines a function fn with parameters a, x, y, and a rest parameter numbers, showcasing how parameters are declared and used in functions.
-
-Question 7: Spread operator and rest operator
-Explanation: The code shows the usage of the rest parameter in a function declaration and the spread operator to pass an array as individual arguments to the function.
-
-Question 8: Callback
-Explanation: This code demonstrates a callback function greeting being passed as an argument to the processUserInput function, allowing dynamic behavior based on user input.
-
-Question 9: Arrow functions
-Explanation: Arrow functions are shown in two forms: one with explicit return and braces, and another with implicit return when the function body is a single expression.
-
-Question 10: this
-Explanation: The code defines an object user with methods rc1 and rc2. rc1 uses an arrow function, resulting in this referring to the global object, while rc2 uses a regular function, allowing this to refer to the object itself.
-
-
-*/
-
 
 //! Function Declaration Or Function Statement or Function defination
 // function square(num) {
@@ -239,9 +204,155 @@ let:Block-scoped, resulting in each setTimeout callback having its own i variabl
 
 //! question-10 parameters vs arguments
 
+//? Params vs. Arguments
+//? This code defines a function fn with parameters a, x, y, and a rest parameter numbers, showcasing how parameters are declared and used in functions.
+
+//?Spread operator and rest operator
+//? The code shows the usage of the rest parameter in a function declaration and the spread operator to pass an array as individual arguments to the function.
+
 // function squar(num) { //?Parameters -value that receive
 //     console.log(num*num)
 // }
 // squar(5); //?Arguments- value that passes
 
 //! ts.=14:00 min
+
+//! o/p based question on arguments and params withSPREAD AND REST
+
+// function multiply(...nums) { //? Rest Operator
+//     console.log(nums)
+//     console.log(nums[0] * nums[1]);
+// }
+// var arr = [5, 6, 7, 8];
+// multiply(...arr); //?Spread Operator
+
+//! q-11-param vs arguments  - o/p based question with SPREAD AND REST
+
+//?Example-1
+
+// const fn = (a, ...numbers, x, y) => {
+//     console.log(x, y)
+// };
+// fn(5, 6, 3, 7);
+
+//? error -> rest parameter always have last formal parameter
+
+//?Example-2
+
+// const fn = (a, x, y, ...numbers) => {
+//     console.log(x, y, numbers,numbers[0]);
+// }
+// fn(5, 6, 3, 7, 8, 9);
+
+//?OUTPUT -> 5,6,3,[7,8,9],7
+
+//!q12-Callback Function [t.s.->16:32]
+// This code demonstrates a callback function greeting being passed as an argument to the processUserInput function,allowing dynamic behavior based on user input.
+
+//a callback function is a function passed into another function as an argument,which it then invoked inside the outer function to complete some kind of routine or action
+
+//?Example:
+
+// function marks(student) {
+//     alert(" less then 60 marks  " + student)
+// }
+// function processUserInput(callback) {
+//     var student = prompt('Enter Student Name')
+//     callback(student)
+// }
+// processUserInput(marks)
+
+//js pre define function like map,reduce,filter,setTimeout ,addEventlistnearis also example
+
+//!q13-Arrow Function [t.s.->19:32]
+
+//?Arrow functions are shown in two forms:
+//? one with explicit return and braces, and another with implicit return when the function body is a single expression.
+
+//?Normal
+// const add = function (firstNum, secondNum) {
+//     return firstNum + secondNum
+// }
+// console.log(add(20, 15))
+
+
+//?Arrow
+// const add2 = (firstNum, secondNum) => {
+//     return firstNum + secondNum
+// }
+// console.log(add2(10, 15))
+
+//!difference between arrow vs Regular
+
+//?1. Syntax
+
+// const add = function(firstNum, secondNum){
+//     return firstNum + secondNum
+// }
+// const add2 = (firstNum, secondNum) => {
+//     return firstNum + secondNum
+// }
+
+//? 2. Implicit "return" Keyword
+// const square = (num) => num * num;
+
+//? 3. Arguments
+// function fn(){
+//     console.log(arguments);
+// }
+// fn(2, 3, 4) //as object i got 2,3,4 on 0,1,2 key
+
+// const finArr = () =>{
+//     console.log(arguments);
+// }
+// finArr(2,3,4) //ERROR : argument is not defined
+
+//?4. this keyword
+
+//?The code defines an object user with methods rc1 and rc2.
+//? rc1 uses an arrow function, resulting in this referring to the global object,
+//? while rc2 uses a regular function, allowing this to refer to the object itself.
+
+// let user = {
+//     username: "Coder",
+
+//     //?Arrow
+//     rc1: () => {
+//         console.log("Subscribe " + this.username) 
+//     },
+
+//     //?Normal
+//     rc2() {
+//         console.log("Subscribe " + this.username) 
+//     },
+
+// };
+
+// user.rc1();//?subscribe Undefined  => this have global scope because its pointing to global object
+// user.rc2();//?subscribe Coder => this have local scope because its pointing to user object
+
+
+
+
+//! Function Notes
+/*
+Question 1: Function Code
+Explanation: This code defines a function square that calculates the square of a number and a function displaySquare that logs the square of 5 using the square function.
+
+Question 2: What is IIFE?
+Explanation: IIFE stands for Immediately Invoked Function Expression. It is a function that is executed immediately after it is defined. Example 1 shows a simple IIFE, while Example 2 demonstrates an IIFE with nested functions.
+
+Question 3: Closure
+Explanation: The code demonstrates closure where the inner function displayName has access to the variable name defined in the outer function init.
+
+Question 4: Function Scope
+Explanation: This code showcases function scope and variable shadowing. In Q-1, the mul function uses the variables num1 and num2 from the global scope. In Q-2, the setTimeout function inside a loop creates a closure but uses the global i variable.
+
+Question 5: Function Hoisting
+Explanation: Function hoisting allows calling a function before it is declared. The code demonstrates hoisting with a function declaration and how it behaves differently from non-hoisted functions.
+
+
+
+
+
+*/
