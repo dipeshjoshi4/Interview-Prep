@@ -44,7 +44,7 @@ console.log("Closure")
 
 //? Global Scope
 // function subscribe() {
-//     var name = "Youtube"; //?Outer inner scope
+//     var name = "Youtube"; //?Outer function scope
 //     function displayName() {
 //         alert(name); //?inner scope
 //     }
@@ -86,3 +86,122 @@ console.log("Closure")
 //- js closure make sure what is in and what isn't in the function and make sure sibiling function nested take the use parent scope varible if its needed
 
 //!T.S.-> 06:13
+
+//! Closure ScopeChain
+//! Question 3: Explain Closure Scope Chain.
+
+// - Closure scope chain refers to the hierarchy of nested functions and their respective scopes that closures have access to.
+// - The sum() creates nested closures, allowing access to variables like a, b, c, d, and e from different levels of scope within the chain.
+// - means closure function can access outer function scope and the (grandparent) global function outer scope
+
+// -> Every  closure has three scopes:
+// Local Scope(Own Scope)
+// Outer Function Scope
+// Gloabal Scope
+
+//!Example-1
+
+// var userName = "ankush"
+// function makeFun() {
+//     var name = "Dipesh"
+//     function displayName(num) {
+//         console.log(name,num, userName);
+//     }
+//     return displayName;
+// }
+// makeFun()(23); //? dipesh 23 Ankush
+
+//?SCOPECHAIN means displayName have acces to his parent function scope or parents parent (global) function scope
+
+//!Example-2
+
+// var e = 10;
+// function sum(a) {
+//     return function (b) {
+//         return function (c) {
+//             return function (d) {
+//                 return a + b + c + d + e;
+//             }
+//         }
+//     }
+// }
+// console.log(sum(1)(2)(3)(4)) //? 20
+
+//!T.S.-> 08:50
+
+//!q-1- make it explain
+
+// let count = 0;
+// (function printCount() {
+//     if (count === 0) {
+//         let count = 1; //shadowing happen
+//         console.log(count); //?1
+//     }
+//     console.log(count); //?0
+// })();
+
+// The code snippet defines an immediately invoked function expression(IIFE) that declares a global variable count and a local variable count inside the printCount function.
+// The output will be 1 followed by 0 because of variable shadowing and the conditional check inside printCount.
+
+//!T.S.-> 10:37
+//! Question - 2 - write a function that allows you to do this
+//! var addsix = createBase(6);
+//! addsix(10); //return 16
+//! addsix(21); //returns 27
+
+// function createBase(num) {
+//     return function (innerNum) {
+//         console.log(innerNum + num);
+//     }
+// }
+// var addsix = createBase(6);
+// addsix(10) //?16
+// addsix(21) //?27
+
+//? USECASE OF CLOSURE -> you can create function as closure where on a certain value can never change
+//-> so here for the answer we create anoynomus function who work as closures and make the createBase value intact
+//-> Explanation: The createBase() returns a closure that adds a base number(6 in this case) to an inner number provided as an argument.
+//-> The addSix function created using createBase(6) adds 6 to its argument when invoked.
+
+//!T.S.-> 12:57
+
+//! question-3- How Closure use for the time optimization of our code
+
+//! NORMAL WAY
+// function find(index) {
+//     let a = [];
+//     for (let i = 0; i < 1000000; i++){
+//         a[i] = i * i
+//     }
+//     console.log(a[index])
+// }
+//? for Example take 6 and 15
+// console.time("6")
+// find(6); //?36
+// console.timeEnd("6") //?24.255 ms
+
+// console.time("15")
+// find(15); //?225
+// console.timeEnd("15") //?18.255 ms
+
+//?Now Use Closure for the time optimization
+
+// function find() {
+//     let a = [];
+//     for (let i = 0; i < 1000000; i++) {
+//         a[i] = i * i
+//     }
+//     return function (index) {
+//         console.log(a[index])
+//     }
+// }
+
+// let closure = find();
+
+// console.time("6")
+// closure(6); //?36
+// console.timeEnd("6") //?6: 0.1708984375 ms
+
+// console.time("15")
+// closure(15); //?225
+// console.timeEnd("15") //? 15: 0.1689453125 ms
