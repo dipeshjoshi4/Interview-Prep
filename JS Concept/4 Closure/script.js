@@ -175,16 +175,18 @@ console.log("Closure")
 //     }
 //     console.log(a[index])
 // }
-//? for Example take 6 and 15
+// //? for Example take 6 and 15
 // console.time("6")
 // find(6); //?36
-// console.timeEnd("6") //?24.255 ms
+// console.timeEnd("6") //?52.255 ms
 
 // console.time("15")
 // find(15); //?225
-// console.timeEnd("15") //?18.255 ms
+// console.timeEnd("15") //?46.255 ms
 
-//?Now Use Closure for the time optimization
+//- Every time value is keep changing
+
+//!Now Use Closure for the time optimization
 
 // function find() {
 //     let a = [];
@@ -205,3 +207,52 @@ console.log("Closure")
 // console.time("15")
 // closure(15); //?225
 // console.timeEnd("15") //? 15: 0.1689453125 ms
+
+//! Very Important Conclusion
+// this also keep changing value everytime but its very low time taking  and its huge time optimization
+//so here anynoumus function take index from their outer scope or lexical scope so that we dont wait for the loop
+
+//! t.s. => 15:33
+
+//! Very Important
+//!Question-4-Block Scope and setTimeout
+// function a() {
+//     for (var i = 0; i < 3; i++) {
+//         setTimeout(function log() {
+//             console.log(i); //What is logged?
+//         },1* 1000);
+//     }
+// }
+// a();
+
+//setTimeout print only after complete code run successfully
+
+//we have reference =>
+// i when its 0 to our memory || i when its 1 to our memory || i when its 2 to our memory || i when its 3 condition false and
+// as early said setTimeout after complete its print and last time i encountered with 3 so its print
+// i i i  => 3 3 3
+
+// if there is let then {i=0} in one scope second scope {i=1} and third scope {i=2} spo after complete code its look on scope to what is the answer and its shows 1,2,3
+
+// if we have to use var and then we have to  anyhow print 0,1,2 so what  we do
+// so we have to use closure
+
+// for (var i = 0; i < 3; i++) {
+
+//     function inner(i) {
+//         setTimeout(function log() {
+//             console.log(i); //What is logged?
+//         }, 1 * 1000);
+//     }
+
+//     inner(i);
+// }
+//?0 1 2
+
+
+// -> every time passed i value in inner its not refresh the value
+// -> complete local value for inner so whole new memory allocation created
+
+//!T.s. -> 19:52
+
+//!que:5:How Would You use a closure to create a private counter?
