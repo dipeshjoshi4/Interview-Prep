@@ -256,3 +256,37 @@ console.log("Closure")
 //!T.s. -> 19:52
 
 //!que:5:How Would You use a closure to create a private counter?
+
+//- when we creat private counter we use prefix "_" => _Counter
+
+function counter() {
+    var _Counter = 0;
+
+    function add(increment) {
+        _Counter += increment
+    }
+
+    function retrive() {
+        return "Counter = " + _Counter
+    }
+
+    return {
+        add,
+        retrive,
+    };
+}
+
+const c =  counter()
+c.add(5)
+c.add(10)
+
+
+console.log(c.retrive());  //Counter =15
+
+//here we dont directly manupulate private counter but we use closure and use function to manipulate the private counter
+
+ //!T.S. => 22:31
+
+ //WE USE SIMILAR concept use in our next question which is Module pattern
+
+ //!Question-6-What is Module  Pattern?
