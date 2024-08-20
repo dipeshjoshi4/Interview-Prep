@@ -290,3 +290,5 @@ console.log(c.retrive());  //Counter =15
  //WE USE SIMILAR concept use in our next question which is Module pattern
 
  //!Question-6-What is Module  Pattern?
+
+ var
