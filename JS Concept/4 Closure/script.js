@@ -259,29 +259,29 @@ console.log("Closure")
 
 //- when we creat private counter we use prefix "_" => _Counter
 
-function counter() {
-    var _Counter = 0;
+// function counter() {
+//     var _Counter = 0;
 
-    function add(increment) {
-        _Counter += increment
-    }
+//     function add(increment) {
+//         _Counter += increment
+//     }
 
-    function retrive() {
-        return "Counter = " + _Counter
-    }
+//     function retrive() {
+//         return "Counter = " + _Counter
+//     }
 
-    return {
-        add,
-        retrive,
-    };
-}
+//     return {
+//         add,
+//         retrive,
+//     };
+// }
 
-const c =  counter()
-c.add(5)
-c.add(10)
+// const c =  counter()
+// c.add(5)
+// c.add(10)
 
 
-console.log(c.retrive());  //Counter =15
+// console.log(c.retrive());  //Counter =15
 
 //here we dont directly manupulate private counter but we use closure and use function to manipulate the private counter
 
@@ -291,4 +291,176 @@ console.log(c.retrive());  //Counter =15
 
  //!Question-6-What is Module  Pattern?
 
- var
+// var Module = (function () {
+//     function privateMethod() {
+//         //do Something
+//     }
+//     return {
+//         publicMethod: function () {
+//             //can Call privateMethod()
+//         },
+//     };
+// })
+// ()
+
+//- public function return to user
+//- private function not get outside module scope but a public function can call private function
+//- in example - if private have api call but we dont want to share api with user we can manipulate for information with user to get data
+//- in this cases module pattern helps a lot
+
+// var Module = (function () {
+//     function privateMethod() {
+//         console.log('private')
+//     }
+//     return {
+//         publicMethod: function () {
+//             console.log('public')
+//         },
+//     };
+// })
+//     ()
+// Module.publicMethod(); // public
+// Module.privateMethod(); //is not a function
+
+//!T.s. -> 24:24
+
+//!Question-7-make this run only once
+
+//?multiple time run like this
+
+// let view;
+// function likeTheVideo() {
+//     view = "Coder"
+//     console.log("Subscribe to ",view);
+// }
+// likeTheVideo() //Subscribe to coder
+// likeTheVideo() //Subscribe to coder
+// likeTheVideo() //Subscribe to coder
+
+//?one time running like this
+
+// let view;
+// function likeTheVideo() {
+//     let called = 0;
+//     return function () {
+//         if (called > 0) {
+//             console.log("Already Subscribe to  Programmer")
+//         } else {
+//             view = "Coder";
+//             console.log("Subscribe to coder");
+//             called++;
+//         }
+//     };
+// }
+
+// let finalAns = likeTheVideo()
+// finalAns(); //?Subscribe to Coder
+// finalAns(); //Already Subscribe to  Programmer
+// finalAns(); //Already Subscribe to  Programmer
+// finalAns(); //Already Subscribe to  Programmer
+
+
+//!T.s. -> 27:00
+
+//! Question-8-Once Polyfill
+//? if interview ask more genric function to do this
+
+function once(func, context) { 
+    let ran;
+    return function () { 
+        if (func) {     
+            ran = func.apply(context || this, arguments); 
+            func = null;
+        }
+        return ran;
+    }
+}
+
+//?multiple time run
+// const hello = ()=>console.log("hello");
+// hello(); //?hello
+// hello(); //?hello
+// hello(); //?hello
+
+//?one time runs
+// const hello = once((a,b)=>console.log("hello",a,b));
+// hello(5,4); //?hello 5 4
+// hello();
+// hello();
+
+//?Understand the code
+//we check if function have value then we know func have value this once((a,b)=>console.log("hello",a,b));
+//so we run the function and after running ran varible we null the func so its work only once
+
+
+//?Apply Method
+// arguments => takes array
+// apply method is use for take argument as an array
+//?example-1
+// const numbers = [5, 6, 2, 3, 7];
+// const max = Math.max.apply(null, numbers);
+// console.log(max);//? output: 7
+
+//?Understanding some varible
+// this => referes to func
+// if (func) {  }    //?if something inside func then go into this
+// context => any local context if there is any one have
+
+//!T.s. -> 30:40
+
+//!Question-9-Memozie Polyfill
+
+//!Question
+//? give this function which have expesive calculation inside and takes decent amount of time to run  and time calculation is differetn both the time.so how do we minimize the time when both function calculation and parameter are the same. we need to cache the result of previous function somewhere
+
+// ?code
+// const clumsySquare = (num1, num2) => {
+//     for (let i = 1; i <= 10000000; i++) { }
+//     return num1*num2
+// }
+// console.time("First Call");
+// console.log(clumsySquare(9467, 7649));
+// console.timeEnd("First Call");
+
+// console.time("Second Call");
+// console.log(clumsySquare(9467, 7649));
+// console.timeEnd("Second Call");
+
+//? Answer
+
+function myMemoize(fn) {
+    const res = {};  //storing result of previously executed function
+    return function (...args) { //takes argument from the user || first convert this arguments  into string
+        var argsCache = JSON.stringify(args);
+    }
+}
+
+const clumsySquare = (num1, num2) => {
+    for (let i = 1; i <= 10000000; i++) { }
+    return num1 * num2
+}
+console.time("First Call");
+console.log(clumsySquare(9467, 7649));
+console.timeEnd("First Call");
+
+console.time("Second Call");
+console.log(clumsySquare(9467, 7649));
+console.timeEnd("Second Call");
+
+
+
+
+//!ts:36:05
+
+//!Question-10- difference between closure and scope
+
+//? Closure
+// - Closure refers to a function's ability to retain access to variables from its lexical scope even after that scope has closed,
+// - whenevr you create function with in another function (nested function) then inner function is the Closure
+// - this closure usully takes outer function varible in latter time
+// - global -> outer scope -> local scope
+
+//? Scope
+//- scope is what varible you have to access
+//- while scope refers to the visibility and accessibility of variables within a specific context,
+//- such as global scope, function scope, or block scope.
