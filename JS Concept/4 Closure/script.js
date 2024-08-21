@@ -408,43 +408,64 @@ function once(func, context) {
 
 //!T.s. -> 30:40
 
+//!Very Important
 //!Question-9-Memozie Polyfill
 
 //!Question
 //? give this function which have expesive calculation inside and takes decent amount of time to run  and time calculation is differetn both the time.so how do we minimize the time when both function calculation and parameter are the same. we need to cache the result of previous function somewhere
 
 // ?code
-// const clumsySquare = (num1, num2) => {
+// const clumsyProduct = (num1, num2) => {
 //     for (let i = 1; i <= 10000000; i++) { }
 //     return num1*num2
 // }
 // console.time("First Call");
-// console.log(clumsySquare(9467, 7649));
+// console.log(clumsyProduct(9467, 7649));
 // console.timeEnd("First Call");
 
 // console.time("Second Call");
-// console.log(clumsySquare(9467, 7649));
+// console.log(clumsyProduct(9467, 7649));
 // console.timeEnd("Second Call");
 
 //? Answer
 
-function myMemoize(fn) {
+function myMemoize(fn, context) {
+
     const res = {};  //storing result of previously executed function
-    return function (...args) { //takes argument from the user || first convert this arguments  into string
-        var argsCache = JSON.stringify(args);
+
+    return function (...args) { //takes argument from the user || 
+
+        var argsCache = JSON.stringify(args); //first convert this arguments  into string
+
+        if (!res[argsCache]) { //if there is no argscache in our res obj then we calaculate our value
+            res[argsCache] = fn.call(context || this, ...args) // res = {"5,6":30}
+        }
+        return res[argsCache];
     }
 }
 
-const clumsySquare = (num1, num2) => {
+
+const clumsyProduct = (num1, num2) => {
     for (let i = 1; i <= 10000000; i++) { }
     return num1 * num2
 }
-console.time("First Call");
-console.log(clumsySquare(9467, 7649));
-console.timeEnd("First Call");
+
+const memoizedClumzyProduct = myMemoize(clumsyProduct)
+
+// console.time("First Call");
+// console.log(clumsyProduct(9467, 7649)); //84.8888
+// console.timeEnd("First Call");
+
+// console.time("Second Call");
+// console.log(clumsyProduct(9467, 7649)); //86.888
+// console.timeEnd("Second Call");
+
+console.time("First  Call");
+console.log(memoizedClumzyProduct(9467, 7649)); //8.8888
+console.timeEnd("First  Call");
 
 console.time("Second Call");
-console.log(clumsySquare(9467, 7649));
+console.log(memoizedClumzyProduct(9467, 7649)); //0.888
 console.timeEnd("Second Call");
 
 
