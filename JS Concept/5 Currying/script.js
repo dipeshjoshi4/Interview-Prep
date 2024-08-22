@@ -186,5 +186,33 @@ This code snippet demonstrates a custom implementation of the curry function, wh
 // const update = updateElementText("heading");
 // update("hello Dev Let's Code") //? it chnage from "Hello Dipesh" to " Hello Dev"
 
+
 //![16:12]
+//! Most Importent (Senior most time)
 //!Question-6-curry() implementation
+//! Example Converts f(a,b,c) into f(a)(b)(c)
+
+// function curry(func) {
+//     return function curriedFunc(...args){ //takes argument from the function as form of array
+        //     // ? console.log(args.length,func.length);
+//       if (args.length >= func.length) {
+//             return func(...args);
+//         }
+
+//         else {
+//             return function (...next) {
+//                 return curriedFunc(...args, ...next);
+//             }
+//         }
+
+//     }
+// }
+
+// const sum = (a, b, c, d) => a + b + c + d;
+// const totalSum = curry(sum);
+// console.log(totalSum(1)(6)(5)(6))
+
+//Explanation
+// here the when you add args one by one then first arg >= func.length untill it taking more args
+// once it reach same arg and func length it will giving sum function
+//as per sum function  conditions it gives our answer
