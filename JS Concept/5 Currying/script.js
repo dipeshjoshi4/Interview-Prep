@@ -107,3 +107,84 @@ This code snippet demonstrates a custom implementation of the curry function, wh
 
 //![07:35]
 //!Question-3-Infinite Currying ->sum(1)(2)(3).....(n)
+
+//?for limitited Currying
+
+// function add(a) {
+//     return function (b) {
+//         return function () {
+//             return a + b;
+//         }
+//     }
+// }
+// console.log(add(5)(2)())
+
+//but we want to write code which works for infinite like this---> console.log(add(5)(2)(4)(8)()); | they should adopted this code
+
+//?infinite currying Example
+
+// function add(a) {
+//     return function (b) {
+//         if (b) return add(a + b);
+//         return a;
+//     }
+// }
+// console.log(add(5)(2)(4)(8)()) //?19
+
+//?Explanation
+//here add(a) function  return function b .if there is any value for b it takes and return a+b
+//now a value is 5+2 =7  and it check for add(b) = add(4) <called></called> . if b have any value and b takes 4 as b and a+b now 7+4=11
+//now a =11 and b have params so b =8 and then a+b now 11+8 = 19
+// then a =19 and check b have any parameter so b find () no params and as per condition its return a which 19
+//so it works for infinite currying it adopt
+
+//![11:35]
+//!Question-4-Currying vs Partial Application
+
+//?Key difference - no of nested function are curried function have its depend of number of argument it received
+//? means no of argument it receive accept no of nested function => currying
+
+//? Partial application
+
+// function sum(a) {
+//     return function (b, c) {
+//         return a + b + c;
+//     }
+// }
+// const x = sum(10);
+// console.log(x(5,6))
+//? // OR
+// console.log(sum(10)(5, 6));
+
+//this function ehave 3 argument and 2 nested function unlike our previous version have 3 argument and accept 3 nested function
+//SO THIS IS NOT CURRYING ITS JUST PARTIAL APPLICATION
+// partial application work is  transform function into another function with small arity(No of operands or argument that function receive)
+
+//? Currying
+
+// function sum(a) {
+//     return function (b) {
+//         return function (c) {
+//             return a + b + c;
+//         }
+//     }
+// }
+// const x = sum(10);
+// console.log(x(5)(6))
+// //?or
+// console.log(sum(10)(5)(6));
+
+//![13:40]
+//!Question-5-Manipulating DOM
+//! Explain real world scenario where you use currying
+
+// function updateElementText(id) {
+//     return function (content) {
+//         document.querySelector("#" + id).textContent = content;
+//     }
+// }
+// const update = updateElementText("heading");
+// update("hello Dev Let's Code") //? it chnage from "Hello Dipesh" to " Hello Dev"
+
+//![16:12]
+//!Question-6-curry() implementation
