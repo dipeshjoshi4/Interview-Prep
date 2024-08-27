@@ -167,7 +167,6 @@ Explanation: The multiply function doubles the number property of the passed obj
 //!T.S. ->07:28 Most IMported
 
 //!Question-3-What's The Output of the following code
-
 // const a = {};
 // const b = { key: "b" };
 // const c = { key: "c" };
@@ -175,7 +174,9 @@ Explanation: The multiply function doubles the number property of the passed obj
 // a[c] = 456;
 // console.log(a[b]); //456 //? How
 
-//ok first of all we 
+//?Answer below
+
+//ok first of all we
 //? console.log(a); //?{[object object]:456}
 //so whenever you write or assign like this
 //? a[b]
@@ -185,3 +186,67 @@ Explanation: The multiply function doubles the number property of the passed obj
 //so when he tries to converts into string its turn out to be object object
 //so both of a[b] and a[c] become => a["[object object]"] first assign 123 and then overlap 456 value answer is 456
 
+//!T.S. ->08:56
+
+//! Question-4-What's JSON.stringify and JSON.parse ?
+
+const User = {
+    name: "Dipesh",
+    age:24,
+}
+
+//object into string
+
+//? Object Print
+//console.log(User);
+
+//? object------>string
+// const strObj = JSON.stringify(User)
+//console.log(strObj);
+
+//? undefined --> because it not anymore object so
+//console.log(strObj.name);
+
+//? so string ----> object
+//console.log(JSON.parse(strObj)) //?Object
+
+//?Where Can You can use This
+//Usecase -> stroing this in local storage
+
+//?Example-1
+//?if direct object pass
+// localStorage.setItem("test", User)
+
+//?Example-2
+//?show the interviewer like this also show what happen we store direct object in localStorage
+// const strObj = JSON.stringify(User)
+// localStorage.setItem("test", strObj)
+// console.log((localStorage.getItem("test"))); //object converted string  print
+// console.log(JSON.parse(localStorage.getItem("test"))); //object print
+
+//!T.S. ->11:56
+//!Question-5-What's the Output?
+// console.log([..."Lydia"]) //(5) ['L', 'y', 'd', 'i', 'a']
+//?convert string into different parent in array with spread
+
+//!T.S. ->12:31
+//!Question-6-What's the Output
+// const user = { name: "Lydia", age: 21 };
+// const admin = { admin: true, ...user };
+// console.log(admin);
+//? {admin: true, name: 'Lydia', age: 21}
+
+//!T.S. ->13:11
+//!Question-7-What's the Output
+// const settings = {
+//     username: "Piyush",
+//     level: 19,
+//     health: 90,
+// };
+// const data = JSON.stringify(settings, ["level", "health"])
+// console.log(data)
+//?{"level":19,"health":90}
+//? so here stringfy the object setting thos property who were written specifically and ignore username key
+
+//!T.S. ->13:51
+//!Question-8-What's the Output
