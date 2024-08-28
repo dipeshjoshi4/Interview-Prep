@@ -250,3 +250,74 @@ const User = {
 
 //!T.S. ->13:51
 //!Question-8-What's the Output
+
+// const shape = {
+//     radius: 10,
+//     diameter() {
+//         return this.radius * 2;
+//     },
+//     perameter: () => 2 * Math.PI * this.radius,
+// }
+
+// console.log(shape.diameter());  //?20   => normal function this refer that function or object
+// console.log(shape.perameter()); //?NaN  => arrrow function this refer to window object
+
+//!T.S. ->15:11
+//!Question-9-What is destructuring in Objects ?
+
+
+//!Normal
+//?destructuring means taking out specific property from object like this
+// let user = {
+//     name: "Piyush",
+//     age: 24,
+//     welcomFunc: function greeting() {
+//         console.log("Hi");
+//     }
+// }
+// const { name  } = user //?{name} is destructuring
+// console.log(name) //?Piyush
+
+//!What if there is same name then simply while destructuring do this { name :myName } insted of { name }
+// let user = {
+//     name: "Piyush",
+//     age: 24,
+//     welcomFunc: function greeting() {
+//         console.log("Hi");
+//     }
+// }
+// const name = "coder";
+// const { name: myName } = user
+// console.log(myName)
+
+//!Destructuring can perform nested way too
+// let user = {
+//     name: "Piyush",
+//     age: 24,
+//     welcomFunc: function greeting() {
+//         console.log("Hi");
+//     },
+//     fullName: {
+//         first: "dipesh",
+//         second: "joshi",
+//     },
+// };
+
+// const { fullName:{first} } = user;
+// console.log(first)
+
+//!T.S. ->17:00
+//!Question-10-What is the output?
+// function getItems(fruitList, ...args, favouriteFruit) {
+//     return [...fruitList, ...args, favouriteFruit]
+// }
+
+//?here we see in the question rest parameter must be last in the parameter list so
+function getItems(fruitList, favouriteFruit, ...args) {
+    return [...fruitList, ...args, favouriteFruit]
+}
+
+console.log(getItems(["banana", "apple"], "pear", "orange")); //(4) ['banana', 'apple', 'orange', 'pear']
+
+//!T.S. ->18:00
+//!Question-10-What is the output?
