@@ -190,10 +190,10 @@ Explanation: The multiply function doubles the number property of the passed obj
 
 //! Question-4-What's JSON.stringify and JSON.parse ?
 
-const User = {
-    name: "Dipesh",
-    age:24,
-}
+// const User = {
+//     name: "Dipesh",
+//     age:24,
+// }
 
 //object into string
 
@@ -313,11 +313,146 @@ const User = {
 // }
 
 //?here we see in the question rest parameter must be last in the parameter list so
-function getItems(fruitList, favouriteFruit, ...args) {
-    return [...fruitList, ...args, favouriteFruit]
-}
+// function getItems(fruitList, favouriteFruit, ...args) {
+//     return [...fruitList, ...args, favouriteFruit]
+// }
 
-console.log(getItems(["banana", "apple"], "pear", "orange")); //(4) ['banana', 'apple', 'orange', 'pear']
+// console.log(getItems(["banana", "apple"], "pear", "orange")); //(4) ['banana', 'apple', 'orange', 'pear']
 
 //!T.S. ->18:00
-//!Question-10-What is the output?
+//! Some Question on Object References -> most asked
+//!Question-11-What is the output?
+
+// let c = { greeting: "Hey!" };
+// let d;
+// d = c;
+// c.greeting = "Hello";
+// console.log(d.greeting); //"Hello"
+
+//? - so here what happens when we pass object  to any variable here is d .its pass whole reference not copy
+//? - so answer is Hello
+
+//!T.S. ->19:08
+//!Question-12-What is the output?
+
+//?both are false just because both have different adress .object  only same when they are reference in same area
+// console.log({a:1}=={a:1});//? false
+// console.log({ a: 1 } === { a: 1 });//? false
+
+//? Same Reference: If two variables reference the same object, they will be considered equal:
+//? In this case, obj1 and obj2 reference the same object in memory, so the comparison returns true.
+// const obj1 = { a: 1 };
+// const obj2 = obj1;
+// console.log(obj1 == obj2);  // true
+// console.log(obj1 === obj2); // true
+
+//!T.S. ->19:50
+//!Question-13-What's the output?
+
+// let person = { name: "Lydia" };
+// const members = [person];
+// person = null;
+// console.log(members); //?name:lydia
+
+//but if we modify object properties like this
+// personalbar.name = null;
+// console.log(members); //name:null
+
+//? Visualizing the Process
+
+//?Before person = null:
+// person → { name: "Lydia" }
+// members[0] → { name: "Lydia" }
+
+//? After person = null:
+// person → null
+// members[0] → { name: "Lydia" }
+
+//The key point is that setting person to null only changes what person is pointing to.
+//It doesn't affect other references to the same object, like the one stored in the members array.
+//Therefore, the object { name: "Lydia" } still exists in memory and is accessible through members[0].
+
+//!T.S. ->20:54
+//!Question-14-What's the output?
+
+// const value = { number: 10 };
+// const multiply = (x = { ...value }) => {
+//     console.log((x.number = x.number * 2));
+// };
+// multiply(); //?20
+// multiply(); //?20
+// multiply(value); //?20
+// multiply(value); //?40
+
+//?Explanation
+
+//here x is take clone of value object so we get number like x.number = 10
+//so first 2 answer is 10*2 = 20
+// 3rd value object directly pass in x . value object not make clone via spread operator
+//so in 3rd answer is 20. b
+//but after 3rd number is now 20 and 4th answer is 20*2 = 40
+
+//?Code For Last 2 Operation
+
+//for last 2 operation code is visulize like this
+// const multiply = (x ) => {
+//     console.log((x.number = x.number * 2));
+// };
+
+
+//!T.S. ->22:34
+//!Question-15-What's the output?
+
+// function Chnage(person) {
+//     person.age = 25;
+//     person = {
+//         name: "John",
+//         age: 50,
+//     };
+//     return person;
+// }
+// const personObj1 = {
+//     name: "Alex",
+//     age: 30,
+// };
+// const personObj2 = Chnage(personObj1)
+// console.log(personObj1); //? {name:"Alex", age:25}
+// console.log(personObj2); //? {name: "John",age: 50}
+
+//!T.S. ->24:05
+//!Question-16-What's shallow copy and Deep copy of object?
+
+//? shallow copy
+//when we copy object to naother object .but where we copy  that object have some refernce to original object
+//ex:if A Object copied and b object have copied A Object . so b Object have some reference of A object
+//when one object refernce hold by another Object
+
+
+//? Deep copy/Clone
+//when we completly clone an object to into another variable called deep copy.where we dont have any refernece of original object
+
+//!T.S. ->24:45
+//!Question-17-How to Deep Copy or Clone
+
+let user = {
+    name: "Coder",
+    age: 24,
+};
+
+//?1st way of copy
+// const objectClone = Object.assign({}, user) //here in assign as per syntax => first=> target || second => clone obejct name
+// objectClone.name = "dipesh" // no affect on original user object because its deep copy
+// console.log(objectClone)
+// console.log(user)
+
+//?2nd way of copy
+// const objectClone = JSON.parse(JSON.stringify(user))
+// objectClone.name = "dipesh"
+// console.log(objectClone)
+// console.log(user)
+
+//?3rd way of copy
+// const objectClone = {...user}
+// objectClone.name = "dipesh"
+// console.log(objectClone)
+// console.log(user)
