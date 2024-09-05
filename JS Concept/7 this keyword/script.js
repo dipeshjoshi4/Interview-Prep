@@ -32,7 +32,7 @@ Explanation: The calc object is set up to perform chained arithmetic operations.
 */
 
 //?Define 'this' Keyword
-// -> as per english language "this" in js refere something
+// -> as same in english language "this" in js refere something
 
 //!Example-1
 //?In JavaScript, this refers to the object it belongs to. In the given code, this.a inside the console.log refers to the property a of the global object, which is undefined unless explicitly defined elsewhere.
