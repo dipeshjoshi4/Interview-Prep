@@ -2,26 +2,6 @@ console.log("call bind apply");
 
 //!Notes
 /*
-Question 10: How will you Create a bound function
-Explanation:
-A bound function is created using the bind method. In this case, f is bound to null, and the resulting function is assigned to user.g.
-
-Question 11: Bind Chaining?
-Explanation:
-Bind chaining involves calling bind multiple times on a function. However, only the first bind call is effective in setting the this context. Subsequent bind calls have no effect.
-
-Question 12: Fix the code
-Explanation:
-The checkPassword function prompts for a password and calls either loginSuccessful or loginFailed based on the input. bind is used to ensure that this inside loginSuccessful and loginFailed refers to the user object.
-
-Question 13: Partial application for login
-Explanation:
-The checkPassword function is modified to accept two callbacks, ok and fail. The login method in the user object is then passed as arguments to askPassword, but the specific partial application is not provided.
-
-Question 14: Explicit Binding with Arrow Function
-Explanation:
-Arrow functions do not have their own this context and instead inherit it from the surrounding lexical scope. Therefore, using call or bind with arrow functions doesn't change the context.
-
 Question 15: Call Method Polyfill
 Explanation:
 A polyfill for the call method is provided, allowing a function (purchaseCar in this case) to be invoked with a specific context (car3) and arguments ('₹' and '60,00,000').
@@ -207,3 +187,106 @@ A polyfill for the bind method is provided, allowing a function (purchaseCar) to
 //- so here numbers cant go in Math.min() as argument
 // - but we can apply method and take argument as in form of array numbers[]
 //- here we dont need any reference for get any varible so context is null ....so apply(null, numbers)
+
+//!14:05
+//!Question 10:BOuND FUNCTION
+
+//?Code
+// function f() {
+//     console.log(this);
+// }
+// let user = {
+//     g:f.bind(null),
+// }
+// user.g(); //? window object
+
+// A bound function is created using the bind method.In this case, f is bound to null, and the resulting function is assigned to user.g.
+//so here f.bind(null) is refere to another () and that refer to window
+// so when we call user.g() it refer window object
+
+//!15:00
+//! Question 11: Bind Chaining ?
+//Bind chaining involves calling bind multiple times on a function.However, only the first bind call is effective in setting the this context.Subsequent bind calls have no effect.
+
+// function f() {
+//     console.log(this.name)
+// }
+// f = f.bind({ name: "john" }).bind({ name: "Ann" });
+// f();//?John
+
+//- once function is bind with particular object then its always bound with that object
+//- function which bound with bind keyword can not be rebound
+
+//!15:54
+//!Question 12: Fix the code
+//- The checkPassword function prompts for a password and calls either loginSuccessful or loginFailed based on the input.
+//- bind is used to ensure that this inside loginSuccessful and loginFailed refers to the user object.
+
+//?CODE
+// function checkPassword(success, failed) {
+//     let password = prompt("Password?", "");
+//     if (password == "coder coder") success();
+//     else failed();
+// }
+// let user = {
+//     name: "dipesh joshi",
+//     loginSuccessful() {
+//         console.log(`${this.name} loggod in`);
+//     },
+//     loginfailed() {
+//         console.log(`${this.name} failed to loggod in`);
+//     },
+// };
+// checkPassword(user.loginSuccessful.bind(user), user.loginfailed.bind(user))
+
+//?In This Example
+//so here in this we have callback function for success and failed .
+//but in checkPasword() have find name in global object but could not have so that how our callbacks this.name works so for that
+// we bind our callback with bind and refer(context given to) user{} for name
+
+//!18:11
+//!Question 13: Partial application for login
+//The checkPassword function is modified to accept two callbacks, ok and fail.
+//The login method in the user object is then passed as arguments to askPassword, but the specific partial application is not provided.
+
+//?CODE
+// function checkPassword(ok, fail) {
+//     let password = prompt("Password?", "");
+//     if (password == "coder coder") ok();
+//     else fail();
+// }
+// let user = {
+//     name: "dipesh joshi",
+//     login(result) {
+//         console.log(this.name + (result ? " login succesfull" : " login failed"))
+//     },
+// };
+// checkPassword(user.login.bind(user, true), user.login.bind(user, false));
+
+//we have suppose to return function into checkPassword
+//bind give use one function so we bind with the context of user and then we will get the answer
+//user.login.bind(user, true) this act like ok()
+//user.login.bind(user, true) this act like fail()
+
+//!20:00
+//!Question:14:Explicit Binding with arrow Function
+//Arrow functions do not have their own this context and instead inherit it from the surrounding lexical scope.
+//Therefore, using call or bind with arrow functions doesn't change the context.
+
+//?CODE
+// const age = 10;
+// var person = {
+//     name: "dipesh",
+//     age: 20,
+//     getAgeArrow: () => console.log(this.age),
+//     getAge: function () {
+//         console.log(this.age);
+//     },
+// };
+// var person2 = { age: 24 };
+
+// person.getAgeArrow.call(person2); //?undefined
+// person.getAge.call(person2); //?24
+
+//!22:00
+//!Question:15:Pollyfill for call method
