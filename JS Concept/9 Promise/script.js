@@ -35,3 +35,103 @@ Question 10: Promise Polyfill
 Explanation: The Promise Polyfill is a custom implementation of the Promise class. It provides basic functionalities like then, catch, resolve, and reject.The example demonstrates how to create and use a Promise using the custom Polyfill.
 
 */
+
+// we asked data from api we ask our data from frontend and if we get some data and means promise fulfilled and we display to user
+//but if it doesnt get data means some error we display some error
+
+//Synchronous vs Asynchronous Code
+
+//! Synchronous Code
+// console.log("start");
+// console.log("my name is dipesh joshi");
+// console.log("finish");
+
+//! ASynchronous Code
+//?Example-1
+// console.log("start");
+// setTimeout(() => {
+//     console.log("my name is dipesh joshi");
+// },1000)
+// console.log("finish");
+
+//- Synchronous code always run first and then async code run in js
+
+//!Callback
+
+//?Example-1
+
+// console.log("start");
+// function importentAction() {
+//     setTimeout(() => {
+//         return `subscribe to ${username}`;
+//     }, 1000);
+// }
+// const message = importentAction("Coder");
+// console.log(message)
+// console.log("stop");
+
+//?OUTPUT
+//start
+//undefined => because importanAction() give undefiend because in async function and so message dont any output and get undefiend
+//stop
+
+//?Example-2
+// console.log("start");
+// function importentAction(username, cb) {
+//     setTimeout(() => {
+//         cb(`subscribe to ${username}`)
+//     }, 1000);
+// }
+// const message = importentAction("coder", function (message) {
+//     console.log(message);
+// })
+// console.log("stop");
+
+//?OUTPUT
+//start
+//stop
+//subscribe to coder
+
+//?Example - 3 -> withot dependecy 2 function with callback call
+
+// console.log("start");
+
+// function importentAction(username, cb) {
+//     setTimeout(() => {
+//         cb(`subscribe to ${username}`)
+//     }, 2000);
+// }
+// function liketheVideo(video, cb) {
+//     setTimeout(() => {
+//         cb(`like the ${video} video`)
+//     }, 1000);
+// }
+// function shareTheVideo(video, cb) {
+//     setTimeout(() => {
+//         cb(`share the ${video} video`)
+//     }, 1500);
+// }
+
+// const message = importentAction("coder", function (message) {
+//     console.log(message);
+//     liketheVideo("JS ROUND", (cbfunc) => {
+//         console.log(cbfunc)
+//     })
+//     shareTheVideo("JS ROUND", (cbfunc) => {
+//         console.log(cbfunc)
+//     })
+// })
+
+// console.log("stop");
+
+//?here how many more time importentAction() take but its always comes first vecause in message varible first importentAction() call and then liketheVideo() call
+
+//!Callback Hell
+//the nesting of calbback makes our code will be become little bit messy .when we working on big code base the no of callback were more.this is weried looking pyramid structure form. this is why its look like pyramid of doom. this concept will call callback Hell because we have so mmany callback nested .so its very hard to read and very hard to understand.for solution of this is called Promise
+
+//!Promise Start 09:20
+
+// promise is basically represent the upcoming complition or failure of async event and its resulting value.
+//example : mother and child analogy
+
+//?Example-1
