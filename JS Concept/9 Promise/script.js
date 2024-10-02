@@ -134,4 +134,6 @@ Explanation: The Promise Polyfill is a custom implementation of the Promise clas
 // promise is basically represent the upcoming complition or failure of async event and its resulting value.
 //example : mother and child analogy
 
-//?Example-1
+//?10:00
+//? Example-1
+
