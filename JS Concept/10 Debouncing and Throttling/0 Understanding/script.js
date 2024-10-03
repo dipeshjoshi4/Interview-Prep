@@ -20,24 +20,26 @@ Question: What is the purpose of the JavaScript code for a custom throttle funct
 
 //!What IS Debounce functionality ? How it works ? Why we need it?
 //? debounce work on flipkart searchbar
-// when i type something and stop for some millisecond then serch api show me some suggestive text by fetching api call
-//this how debounce work it help us optimize how we call certain events
-//if we put api call on every latter or every keystorke press .they throw lot of unnecessary api calls and that api calls puts pressure on our server. to avoid this issue we use debounce
+//- when i type something and stop for some millisecond then serch api show me some suggestive text by fetching api call
+//- this how debounce work it help us optimize how we call certain events
+//- if we put api call on every latter or every keystorke press .
+//- they throw lot of unnecessary api calls and that api calls puts pressure on our server.to avoid this issue we use debounce
 //- it limit the execution and delay for sometime then call function Again
 
 //Debounce Visualluzation
+// - we call every latters in time of 100ms but function call when we paused write letter after some specific time that we set then only 1 api call and give data
 
-// - we call every latters in time of 100ms but function call when we paused write letter after some specific time tghat we set then only i api call and give data
-
-// example - |  |  |  |  |  |     * here function call   |
+// example ----->  |  |  |  |  |  |     * here function call   |
 
 //!What IS Throttling functionality ? How it works ? Why we need it?
 
 // - Example -> twitter scrolling Throttling works
 
-//- how Unlimited scroll animation work if i check of all scrolol thousadn of api calls run and fetch data .its load and heavy the app. you cant do that .for that Throttling comes in the picture
+//- how Unlimited scroll animation work if i check of all scroll thousand of api calls run and fetch data .
+//- its load and heavy the app.you cant do that.for that Throttling comes in the picture
 
-//- so we put throttling on action of scroll action of twitter .so when the scroll comes to bottom reaching 5000px. api call and new post are coming.so scrooll animation.
+//- so we put throttling on action of scroll animation of twitter .
+//- so when the scroll comes to bottom reaching 5000px.api call and new post are coming.so scrooll animation.
 
 
 

@@ -15,13 +15,11 @@ var triggerCount = 0;
 
 const start = new Date().getTime();
 
-
-
 const throttleCount = _.throttle(() => {
     const now = new Date().getTime()
     console.log(now - start)
     count.innerHTML = ++triggerCount;
-}, 800)
+},2000)
 
 btn.addEventListener("click", () => {
     btnPress.innerHTML = ++pressCount;
