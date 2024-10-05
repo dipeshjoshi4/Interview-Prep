@@ -1,6 +1,8 @@
 
 console.log("Event Propagation")
 
+
+
 /*
 Question 1: Event Bubbling
 Explanation: Event bubbling refers to the propagation of an event from the innermost target element to the outermost ancestor. In the provided code, clicking on the button will also trigger the click event on the form and div elements due to event bubbling.
@@ -24,3 +26,8 @@ Question 7: Create a Modal which closes by clicking on negative space
 Explanation: This code sets up a modal that becomes visible when a button with the class "modalButton" is clicked. Clicking on the modal container (the area outside the modal content) will hide the modal by toggling its display property between "flex" and "none".
 
 */
+
+//Q-1-What is Event propagation?
+
+// This code can be placed in a script that runs after the external script has loaded
+
