@@ -1,0 +1,33 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modalContainer{
+    display:none;
+    position: absolute;
+    top:0;
+    background-color: rgba(221,221,221,0.5);
+    width: 100vw;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    width:300px;
+    height:200px;
+    background-color: white;
+    padding:20px;
+    box-shadow: 0 0 5px grey;
+    border-radius: 10px;
+}
