@@ -98,10 +98,30 @@ Explanation: The deepClone function recursively creates a deep copy of an object
 //         console.log(`${this.name} is also know as ${this.username}`);
 //     }
 // }
-// person.__proto__ = additional;
+// person.__proto__ = additional;//?its kind of inheritance of prototype
 // console.log(person.alias()) //? dipesh is also know as Coder
 
 // so here person object first try and search every property inside his object  and if the property or function not person object then he goes to  object prototype .and we here inherit additional object prototype
 // so we get some property and execute it
 
-//?Concept of constructor and new keyword
+//?Prototype Inheritance
+
+//- Constructor and new keyword is very well know for to understand prototype inheritance
+//- function constructor in js used to create some object with some specific property & Methods
+
+//?Example
+
+function Animal(name) {
+    this.name = name;
+}
+
+//Add a method to the prototype
+Animal.prototype.sayName = function () {
+    console.log("my name is " + this.name);
+};
+
+//create instance from animal which is object and have both properties
+
+var animal1 = new Animal("Tiger");  ///new object created from this animal function
+
+console.log(animal1.sayName()) //?My name is Tiger
