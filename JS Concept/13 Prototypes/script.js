@@ -1,11 +1,6 @@
 /*
 
-Ques 1: What will be the output of the following code ?
-Explanation : The output will be:
-Driving a vehicle
-Driving a car
 
-This is because vehicle.drive() invokes the drive() method from the Vehicle prototype, while car.drive() invokes the overridden drive() method in the Car prototype.
 
 Ques 2: Explain the difference between __proto__ and prototype in JavaScript.
 Explanation:__proto__: It points to the prototype of an object and is used for inheritance and accessing the prototype chain.
@@ -104,24 +99,60 @@ Explanation: The deepClone function recursively creates a deep copy of an object
 // so here person object first try and search every property inside his object  and if the property or function not person object then he goes to  object prototype .and we here inherit additional object prototype
 // so we get some property and execute it
 
-//?Prototype Inheritance
+//!-----------------Prototype Inheritance---------------------------
 
-//- Constructor and new keyword is very well know for to understand prototype inheritance
+//- Constructor and new keyword is very well known for to understand prototype inheritance
 //- function constructor in js used to create some object with some specific property & Methods
 
-//?Example
+//!Example - 1
+//! - in this example they make with function constructor & his prototype make object or instance of function
 
-function Animal(name) {
-    this.name = name;
+//? - Defined a constructor
+// function Animal(name) {
+//     this.name = name;
+// }
+
+//? - Add a method to this prototype of above function
+// Animal.prototype.sayName = function () {
+//     console.log("my name is " + this.name);
+// };
+
+//? - create instance or object from animal which is containe both of the properties
+//? - new keyword creates new object & its sets the constructor function prototype as the prototype of newly created object
+//? - means creating new object from Animal function thats Why new Animal()
+// var animalName = new Animal("Tiger");  
+// console.log(animalName.sayName()) //?My name is Tiger
+
+//!Example-2
+//! now from above inheritance we make supply for Dog
+
+//? -  take property of animal class  and name will be handled by Animal()
+//? -  Animal.call(this, name); => this passed because we pass the current object context on this
+function Dog(name, breed) {
+    Animal.call(this, name); 
+    this.breed = breed;
 }
 
-//Add a method to the prototype
-Animal.prototype.sayName = function () {
-    console.log("my name is " + this.name);
-};
+//? - it will inherit whatever in Animal Property => Dog.prototype = Object.create(Animal.prototype)
+// Dog.prototype = Object.create(Animal.prototype)
 
-//create instance from animal which is object and have both properties
+//? - but we want dog have their own constructor property so for that => Dog.prototype.constructor = Dog
+// Dog.prototype.constructor = Dog
 
-var animal1 = new Animal("Tiger");  ///new object created from this animal function
+//? - Add one more property
+// Dog.prototype.bark = function () {
+//     console.log("Woof!!");
+// }
 
-console.log(animal1.sayName()) //?My name is Tiger
+//? - create new object out of this Dog with use of new
+// var DogName = new Dog("Max", "Labrador")
+
+//?19:32
+//?Intwerview Question
+
+//?Question-1-What will be the output of the following code ?
+// Explanation : The output will be:
+// Driving a vehicle
+// Driving a car
+//This is because vehicle.drive() invokes the drive() method from the Vehicle prototype, 
+//while car.drive() invokes the overridden drive() method in the Car prototype.
