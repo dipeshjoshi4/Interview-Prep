@@ -154,5 +154,24 @@ function Dog(name, breed) {
 // Explanation : The output will be:
 // Driving a vehicle
 // Driving a car
-//This is because vehicle.drive() invokes the drive() method from the Vehicle prototype, 
+//This is because vehicle.drive() invokes the drive() method from the Vehicle prototype,
 //while car.drive() invokes the overridden drive() method in the Car prototype.
+
+
+function Vehicle() { }
+Vehical.prototype.drive = function () {
+    console.log("Driving a Vehicle");
+}
+
+function Car() { }
+Car.prototype = Object.create(Vehical.prototype);
+Car.prototype.constructor = Car;
+Car.prototype.drive = function () {
+    console.log("Driving a Car");
+};
+
+var Vehicle = new Vehical();
+var Car = new Car();
+
+vehical.drive();
+Car.drive();
