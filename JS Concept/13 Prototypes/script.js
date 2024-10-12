@@ -128,42 +128,96 @@ function Dog(name, breed) {
 //This is because vehicle.drive() invokes the drive() method from the Vehicle prototype,
 //while car.drive() invokes the overridden drive() method in the Car prototype.
 
+//?CODE
+// function Vehicle() { }
+// Vehical.prototype.drive = function () {
+//     console.log("Driving a Vehicle");
+// }
 
-function Vehicle() { }
-Vehical.prototype.drive = function () {
-    console.log("Driving a Vehicle");
-}
+// function Car() { }
+// Car.prototype = Object.create(Vehical.prototype);
+// Car.prototype.constructor = Car;
+// Car.prototype.drive = function () {
+//     console.log("Driving a Car");
+// };
 
-function Car() { }
-Car.prototype = Object.create(Vehical.prototype);
-Car.prototype.constructor = Car;
-Car.prototype.drive = function () {
-    console.log("Driving a Car");
-};
+// var Vehicle = new Vehical();
+// var Car = new Car();
 
-var Vehicle = new Vehical();
-var Car = new Car();
-
-vehical.drive();
-Car.drive();
+// vehical.drive(); //? Driving a vehicle
+// Car.drive(); //? Driving a car
 
 
-//?Q-2-Explain the difference between __proto__ and prototype in js?
-//Explanation :
-//__proto__: It points to the prototype of an object and is used for inheritance and accessing the prototype chain.
-// prototype: It exists on constructor functions to set up inheritance for objects created by that function, defining shared properties and methods for instances.
+//!Q-2-Explain the difference between __proto__ and prototype in js?
+//?__proto__: its a object property . It points to the prototype of an object and is used for inheritance and accessing the prototype chain.
+//!CODE
+// let nameObj = {
+//     fName: "dipesh",
+//     lName : "Joshi",
+// }
+// console.log(nameObj.__proto__); //? it gives the prototype of that particular datatype
 
-//? Ques 3: What is setPrototypeOf ?
-//Explanation :
+//?prototype: It exists on constructor functions to set up inheritance for objects created by that function, defining shared properties and methods for instances.
+//!CODE
+//inherite the prototype of other constructor functrion =====> Dog.prototype = Object.create(Animal.prototype)
+//own constructor property  =================================> Dog.prototype.constructor = Dog
+// Add one more property and function (methods) =============> Dog.prototype.bark = function () {console.log("Woof!!");}
+
+//! Ques 3: What is setPrototypeOf ?
 //setPrototypeOf is a method used to set the prototype(the object's internal [[Prototype]]) of a specified object to another object or null. It allows changing the prototype dynamically after an object has been created.
 
-//?Ques 4: What is instanceof?
-//Explanation :
+//!CODE EXAMPLE
+
+//?Define ProtoType
+// var animalPrototype = {
+//     sound: function () {
+//         console.log("Making a Sound...");
+//     },
+// };
+//?create an object with animalPrototype as its prototype
+// var dog = Object.create(animalPrototype); //you will see
+
+//?one more object and with his own different prototype
+// var cat = {
+//     purr: function () {
+//         console.log("Purring...")
+//     },
+// };
+//?prototype of dog it get cats prototype. so we can not seen animal prototype sound function
+// Object.setPrototypeOf(dog, cat);
+// console.log(dog.purr());  //?Purring...
+// console.log(dog.sound()); //?ERROR:dog.sound is not a funbction
+
+//!Ques 4: What is instanceof?
 //instanceof is an operator that checks if an object is an instance of a specific constructor or its prototype chain.It returns true if the object is an instance of the constructor or a constructor's prototype chain.
 
-//?Ques 5: How can you create an object without a prototype in JavaScript ?
-//Explanation :
-//You can create an object without a prototype by using Object.create(null).This creates an object with no prototype chain, making it free from any inherited properties or methods.
+//!CODE
+
+// function Animal(name) {
+//     this.name = name;
+// }
+
+// Animal.prototype.sayName = function () {
+//     console.log("My Name is "+ this.name)
+// }
+
+// var animal1 = new Animal("Tiger");
+// function Dog(name, breed) {
+//     Animal.call(this, name);
+//     this.breed = breed;
+// }
+
+// Dog.prototype = Object.create(Animal.prototype)
+// Dog.prototype.constructor = Dog
+// Dog.prototype.bark = function () {
+//     console.log("Woof!!");
+// }
+// var dog1= new Dog("Max", "Labrador")
+// console.log(dog1 instanceof Animal); //?OUTPUT->true
+
+//!Ques 5: How can you create an object without a prototype in JavaScript ?
+//You can create an object without a prototype by using Object.create(null).
+//This creates an object with no prototype chain, making it free from any inherited properties or methods.
 
 //?Ques 6: What will be the output of the following code ?
 //Explanation :
