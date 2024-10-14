@@ -92,7 +92,7 @@
 //? - create instance or object from animal which is containe both of the properties
 //? - new keyword creates new object & its sets the constructor function prototype as the prototype of newly created object
 //? - means creating new object from Animal function thats Why new Animal()
-// var animalName = new Animal("Tiger");  
+// var animalName = new Animal("Tiger");
 // console.log(animalName.sayName()) //?My name is Tiger
 
 //!Example-2
@@ -100,10 +100,10 @@
 
 //? -  take property of animal class  and name will be handled by Animal()
 //? -  Animal.call(this, name); => this passed because we pass the current object context on this
-function Dog(name, breed) {
-    Animal.call(this, name); 
-    this.breed = breed;
-}
+// function Dog(name, breed) {
+//     Animal.call(this, name);
+//     this.breed = breed;
+// }
 
 //? - it will inherit whatever in Animal Property => Dog.prototype = Object.create(Animal.prototype)
 // Dog.prototype = Object.create(Animal.prototype)
@@ -215,15 +215,112 @@ function Dog(name, breed) {
 // var dog1= new Dog("Max", "Labrador")
 // console.log(dog1 instanceof Animal); //?OUTPUT->true
 
+//!t.s.->
 //!Ques 5: How can you create an object without a prototype in JavaScript ?
-//You can create an object without a prototype by using Object.create(null).
-//This creates an object with no prototype chain, making it free from any inherited properties or methods.
+//?You can create an object without a prototype by using Object.create(null).
+//?This creates an object with no prototype chain, making it free from any inherited properties or methods.
 
-//?Ques 6: What will be the output of the following code ?
-//Explanation :
-//The output will be: 10   20     30
-//This is because obj1 is an instance of A with foo as 10, obj2 is an instance of B with foo as 20 (overridden from A), and obj3 is an instance of C with foo as 30 (overridden from both A and B).
+//?CODE
+// var obj1 = Object.create(null)
+// console.log(obj1.toString())
 
-//?Ques 7: Deep Clone an object in JS
-//Explanation:
-//The deepClone function recursively creates a deep copy of an object, including nested objects and arrays, ensuring that the cloned object is completely independent of the original object.
+//!Ques 6: What will be the output of the following code ?
+//? The output will be: 10   20     30
+//? This is because obj1 is an instance of A with foo as 10, obj2 is an instance of B with foo as 20 (overridden from A), and obj3 is an instance of C with foo as 30 (overridden from both A and B).
+
+//?CODE
+/*
+
+function A() { }
+A.prototype.foo = 10;
+
+function B() { }
+B.prototype = Object.create(A.prototype);
+B.prototype.constructor = B;
+B.prototype.foo = 20;
+
+function C() { }
+C.prototype = Object.create(B.prototype);
+C.prototype.constructor = C;
+C.prototype.foo = 30;
+
+var obj1 = new A();
+var obj2 = new B();
+var obj3 = new C();
+
+console.log(obj1.foo);//?10
+console.log(obj2.foo);//?20
+console.log(obj3.foo);//?30
+
+*/
+
+//!t.s.->28:05
+//!Ques 7: Deep Clone an object in JS
+//? The deepClone function recursively creates a deep copy of an object, including nested objects and arrays, ensuring that the cloned object is completely independent of the original object.
+//? - when you copy object at from some place the other place the reference is intact with that
+
+// var obj2 = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//         d: [3, 4],
+//     },
+// };
+// var clonedObj = obj2
+// clonedObj.a = 3;
+// console.log(clonedObj); //?a is 3
+// console.log(obj2);      //?a is 3
+
+//?Here the problem is that when we do like this we have copy the reference so that whenever chnage happen it happen both original and duplicate both object. and that we dont want .
+//?we want completley copy not by the refernece
+
+//!TWO WAY WE CAN DO THAT
+
+//?1
+//?structured deep clone
+// var obj1 = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//         d: [3, 4],
+//     },
+// };
+// const deepCloneObj = structuredClone(obj1)
+// deepCloneObj.a = 25;
+// console.log(deepCloneObj) //?25
+// console.log(obj1) //?1
+
+//?2
+//?manually function for deep
+
+function deepClone(obj) {
+    //handle null and non-object types
+    if (obj === null || typeof obj != "object") { //null check true then return obj
+        return obj;
+    }
+
+    //create a new object or array based on the type of the input object
+    var clone = Array.isArray(obj) ? [] : {};
+
+    //Iterate through each key in the input object
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            clone[key] = deepClone(obj[key]);
+        }
+    }
+    return clone;
+}
+var obj2 = {
+    a: 1,
+    b: {
+        c: 2,
+        d: [3, 4],
+    },
+};
+
+var clonedObj = deepClone(obj2);
+clonedObj.a = 25;
+clonedObj.b.c = 40;
+console.log(clonedObj);
+
+console.log(obj2);
