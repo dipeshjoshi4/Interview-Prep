@@ -1,50 +1,5 @@
 // class launch in es6 version of js
 
-/*
-
-Question 1 - Explain the difference between a class and an object in JavaScript.
-Explanation: 
-A class is a blueprint that defines the structure and behavior of objects.
-Objects are instances of classes that possess properties and methods defined by the class.
-
-Question 2 - What’s the Output?
-Explanation: 
-The output will be:
-console.log(square.area()); // 25
-console.log(rect.area()); // 24
-Here, `square` and `rect` are instances of the `Rectangle` class, and `area()` calculates their areas accordingly.
-
-Question 3 - How does inheritance work in JavaScript classes?
-Explanation: 
-Inheritance in JavaScript classes is achieved using the `extends` keyword.
-It allows a subclass (child class) to inherit properties and methods from a superclass (parent class).
-
-Question 4 - What’s the Output?
-Explanation: 
-The code will result in an error: `Uncaught SyntaxError: A class may only have one constructor`.
-JavaScript classes can only have one constructor, so having multiple constructor declarations in the `Employee` class causes a syntax error.
-
-Question 5 - Which approach is better and why?
-Explanation: 
-The second approach is better because it registers the `getFullName` method in the prototype, making it more memory-efficient than the first approach, which creates a closure for each object containing the method.
-
-Question 6 - Implement this -
-Explanation: 
-The `Calculator` class defines methods for basic arithmetic operations (`add`, `subtract`, `multiply`, `divide`) and returns the result after each operation.
-Method chaining is used to perform multiple operations in sequence.
-
-Question 7 - Inheritance and Polymorphism
-Explanation: 
-The `Shape` class has an `area()` method that returns 0 by default.
-Subclasses `Circle` and `Square` inherit from `Shape` and override the `area()` method to calculate their respective areas (circle's area using πr^2 formula and square's area using side * side formula).
-
-Question 8 - What are Getters and Setters in JS?
-Explanation: 
-Getters and setters are methods used to control access to the properties of a class.
-They allow for more controlled modification and retrieval of property values, such as incrementing likes in a video or ensuring certain conditions are met before setting a property value.
-
-*/
-
 //! Class Defination
 //class is the blueprint of object.they have method and property.which define their behaviour and charcterstics of that objects
 
@@ -129,11 +84,10 @@ They allow for more controlled modification and retrieval of property values, su
 // const coder = new Teacher("Dipesh", "Learn Code")
 // const coder2 = new Teacher("mahesh", "learn offline")
 
-//!Inheritance
+//!Inheritance using classes
 
 //!Example
-
-// class YoutubeTeacher extends Teacher{
+// class Teacher {
 //     constructor(name, channel, likes = 0) {
 //         this.name = name;
 //         this.channel = channel;
@@ -143,9 +97,106 @@ They allow for more controlled modification and retrieval of property values, su
 //         return `Hey its ${this.name}! and welcome to ${this.channel}`
 //     }
 //     like() {
-//         this.videoLikes++//?Access in class | you  can access into function like this => this.intro()
+//         this.videoLikes++
 //         return `liked this video! Current Likes : ${this.videoLikes}`;
 //     }
 // }
-// const coder = new YoutubeTeacher("Dipesh", "Learn Code")
-// const coder2 = new YoutubeTeacher("mahesh", "learn offline")
+//? we have above code of teacher and and now we make property or method of yotubeTeacher so for that we need teacher class
+// class YoutubeTeacher extends Teacher{
+//     constructor(name, channel, likes, Subscribers) {
+//         super(name, channel, likes); //?super key take all of the thing which parent class required
+//         this.Subscribers = Subscribers; //?its related new youtube Teacher
+//     }
+//     SubscribersCount() {
+//?         //all of the parent class function and property are accessible
+//         return `${this.channel} has ${this.Subscribers} subscribers`
+//     }
+// }
+// const ytTeacher = new YoutubeTeacher("DIPESH","CODER",40,"22K" )
+// console.log(ytTeacher);
+// console.log(ytTeacher.intro())
+// console.log(ytTeacher.SubscribersCount())
+
+/*
+
+Question 2 - What’s the Output?
+Explanation: 
+The output will be:
+console.log(square.area()); // 25
+console.log(rect.area()); // 24
+Here, `square` and `rect` are instances of the `Rectangle` class, and `area()` calculates their areas accordingly.
+
+Question 3 - How does inheritance work in JavaScript classes?
+Explanation: 
+Inheritance in JavaScript classes is achieved using the `extends` keyword.
+It allows a subclass (child class) to inherit properties and methods from a superclass (parent class).
+
+Question 4 - What’s the Output?
+Explanation: 
+The code will result in an error: `Uncaught SyntaxError: A class may only have one constructor`.
+JavaScript classes can only have one constructor, so having multiple constructor declarations in the `Employee` class causes a syntax error.
+
+Question 5 - Which approach is better and why?
+Explanation: 
+The second approach is better because it registers the `getFullName` method in the prototype, making it more memory-efficient than the first approach, which creates a closure for each object containing the method.
+
+Question 6 - Implement this -
+Explanation: 
+The `Calculator` class defines methods for basic arithmetic operations (`add`, `subtract`, `multiply`, `divide`) and returns the result after each operation.
+Method chaining is used to perform multiple operations in sequence.
+
+Question 7 - Inheritance and Polymorphism
+Explanation: 
+The `Shape` class has an `area()` method that returns 0 by default.
+Subclasses `Circle` and `Square` inherit from `Shape` and override the `area()` method to calculate their respective areas (circle's area using πr^2 formula and square's area using side * side formula).
+
+Question 8 - What are Getters and Setters in JS?
+Explanation: 
+Getters and setters are methods used to control access to the properties of a class.
+They allow for more controlled modification and retrieval of property values, such as incrementing likes in a video or ensuring certain conditions are met before setting a property value.
+
+*/
+
+//!----------------Interview of Class AND Constructors-------------------
+
+//?Que-1-Explain the difference between a class and an object in JavaScript.
+// A class is a blueprint that defines the structure and behavior of objects.
+// Objects are instances of classes that possess properties and methods defined by the class.
+
+//? Class definition
+// class Car {
+//     constructor(brand, model, year) {
+//         this.brand = brand;
+//         this.model = model;
+//         this.year = year;
+//     }
+//     start() {
+//         return `${this.modal}`
+//     }
+//     getAge(currentYear) {
+//         return currentYear - this.year;
+//     }
+// }
+
+// //? Creating an object (instance) of the Car class
+// const car1 = new Car('Suzki', 'Swift', 2010);
+
+// //? Accessing object properties and methods
+// console.log(car1.brand);         //? Toyota
+// console.log(car1.getAge(2024));  //? 14
+// car1.start();                    //? Toyota Corolla is starting.
+
+//? Question 2 - What’s the Output ?
+// class Rectangle {
+//     constructor(width, height) {
+//         this.width = width;
+//         this.height = height;
+//     }
+//     area() {
+//         return this.width * this.height;
+//     }
+// }
+// const square = new Rectangle(5, 5);
+// const rect = new Rectangle(4, 6);
+// console.log(square.area()); // 25
+// console.log(rect.area()); // 24
