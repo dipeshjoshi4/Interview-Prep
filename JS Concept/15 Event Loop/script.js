@@ -80,6 +80,8 @@ This happens because the pause function returns a promise that resolves after 10
 
 //- for understanding it goes to this website  => https://www.jsv9000.app/
 
+//Question- js single thread language but how ? => so you to explain all the pointes below mention
+
 //? take this Synchronous code as Example see how it works
 
 // function fifth() {
@@ -118,6 +120,68 @@ This happens because the pause function returns a promise that resolves after 10
 //-  while executed synchronous code all the asynchoronus code will be go in task queue
 // - async code means what is not part of js but its all the browser web api and Dom events. all the window object
 
-//! js single thread language but how so you to explain all the pointes above mention
 
+//? Different kind of ASYNC CODE
+// fetch("https://jsonplaceholder.typicode.com/posts")
+//     .then((res) => res.json())
+//     .then(function a(response) {
+//         console.log("Fetch Completed :",response[0])
+//     })
+//     .catch(function c(error) {
+//         console.error("Fetch Error : ",error)
+//     })
 
+// Promise.resolve().then(function b() {
+//     console.log("Promise Resolved")
+// });
+
+// Promise.reject().catch(function c() {
+//     console.log("Promise Reject")
+// })
+
+//?Understanding code
+
+//callstack queue => which handle callback
+//microtask queue => who handle the more priority task then callback like Promise()
+//callback queue => who handle dom interaction ,asyncode like setTimeout means a browser web API
+
+// so like old code first synchronouse code executed and then go for async code
+//async code promise will be go in micro task queue and
+//first promise which organize data from json and document in format => .then((res)=>res.json) => executed => vanish
+//then func a comes from microtask to callstack => a() => executed => vanish
+//?if the resolve not happen => goes to reject and do the same
+//then func a comes from microtask to callstack => c() => executed => vanish
+
+//!How event lopp works when all the queue fill with something
+
+//?CODE
+// console.log("start");
+// setTimeout(() => {
+//     console.log("Inside SetTimeout(TaskQueue)")
+// }, 0)
+// Promise.resolve().then(() => {
+//     console.log("Inside Promise (microTask)");
+// })
+// console.log("End")
+
+//?Understanding code
+
+//1- run syncron code run and executed
+//clg(start) execute
+//2 -goes seTimout in task queue
+//3-goes into Microtask queue
+//4- clg(end) execute
+//5- microtask comes first proroty when the callstack is empty so promise come resolve executed and call stack empty
+//5-now  callstack is empty so setTimeout come code executed and call stack empty
+
+//start
+//end
+//inside Promise (microTask)
+//inside setTimeout (TaskQueue)
+
+//!-----------Interview Question
+
+//!-Que-1-Event loop
+
+// The Event Loop in JavaScript is a mechanism responsible for managing asynchronous behavior in a single - threaded environment.
+//It acts like a traffic controller, ensuring tasks are executed in an orderly manner by processing pending tasks in queues(microtasks and macrotasks).
