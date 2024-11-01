@@ -7,20 +7,23 @@ function Counter() {
         setCount(count+1)
     }
     // return React.createElement(
-    //     "div",
-    //     null,
-    //     React.createElement("p", null, `Count:${count}`),
-    //     React.createElement("button", { onClick: increment }, `Increment`)
-    // );
+    const counter =  React.createElement(
+        "div",
+        null,
+        React.createElement("p", null, `Count:${count}`),
+        React.createElement("button", { onClick: increment }, `Increment`)
+    );
 
-    console.log("Component render")
+    console.log("Component render", counter)
+    return counter;
+
     //?for smooth development we use jsx || for jsx convert for react use babel
-    return (
-        <div>
-            <h1>Count:{count}</h1>
-            <button onClick={increment}>Increment</button>
-        </div>
-    )
+    // return (
+    //     <div>
+    //         <h1>Count:{count}</h1>
+    //         <button onClick={increment}>Increment</button>
+    //     </div>
+    // )
 }
 
 const CounterParent = () => {
