@@ -37,12 +37,12 @@ console.log(result); //?3
 */
 
 //?Write a function that return the largest number in an array
-
+/*
 let arr = [5, 0, 7, 10, 8, 17, 12];
 
 function largestNumber() {
 
-    let largestCount = 0
+    let largestCount = arr[0]; 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] > largestCount) {
             largestCount = arr[i]
@@ -53,3 +53,24 @@ function largestNumber() {
 
 let result = largestNumber(arr);
 console.log(result); //?17
+*/
+
+//?--------------------------------H.W. QUESTION-----------------------------------
+
+//?Write a Function that return the smallest number in an array
+/*
+let arr = [5, 0, 7, 10, 8, 17, 12];
+
+function findSmallest() {
+    let smallest = Infinity; //arr[0]
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] < smallest) {
+            smallest = arr[i]
+        }
+    }
+    return smallest
+}
+
+let result = findSmallest()
+console.log(result); //?0
+*/
