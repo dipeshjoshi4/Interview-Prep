@@ -1,9 +1,7 @@
 
 //? write a function that returns the second largest number from an
-
 let arr = [4, 9, 9, 8, 0, 2, 8, 7, 7, 1];
 // let arr = [4];
-
 
 function secondLargest() {
 
@@ -33,4 +31,4 @@ console.log(result); //8
 //always ask interviewer to is ther any corner case like -> and if interviewer say yes then implement that logic on your code
 //  array is empty or array is less then 2 elements
 //  if the minus element in array then what !!!
-//  what if duplicate element in the array
+//  what if duplicate element in the array ===>  else if (arr[i] > secondLargest && arr[i] != firstLargest) {
