@@ -41,3 +41,34 @@
 44
 
 */
+
+//?Example-3
+// for (let i = 0; i < 3; i++) {
+//     for (let j = i; j > 0; j--) {
+//         console.log(i, j)
+//     }
+// }
+//?OUTPUT
+/*
+11
+22
+21
+*/
+
+//?Example-4
+for (let i = 0; i < 3; i++) {
+    for (let j = i; j >= 0; j--) {
+        console.log(i, j)
+    }
+}
+//?OUTOUT
+/*
+00
+11
+10
+22
+21
+20
+*/
+
+//! till last -10:27
