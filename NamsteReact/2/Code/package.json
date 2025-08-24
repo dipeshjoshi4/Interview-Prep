@@ -10,5 +10,8 @@
     "react"
   ],
   "author": "dipesh joshi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  }
 }
