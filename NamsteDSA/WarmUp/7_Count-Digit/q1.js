@@ -60,15 +60,15 @@
 
 //?Example-4     |corner Case - Negative Number | if n is Negative(-2023) then answer comes 0 but its Actual Answer Should be 4
 
-function countDigits3(n) {
-    n = Math.abs(n)    // converting negtive number into positive
-    let count = 0;
-    while (n > 0) {
-        n = Math.floor(n / 10)
-        count++
-    }
-    return count;
-}
-let num4 = -2023
-let result = countDigits3(num4);
-console.log(result); //4
+// function countDigits3(n) {
+//     n = Math.abs(n)    // converting negtive number into positive
+//     let count = 0;
+//     while (n > 0) {
+//         n = Math.floor(n / 10)
+//         count++
+//     }
+//     return count;
+// }
+// let num4 = -2023
+// let result = countDigits3(num4);
+// console.log(result); //4
