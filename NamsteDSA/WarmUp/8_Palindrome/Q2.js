@@ -2,8 +2,6 @@
 //!Leetcode 125
 //leetcode list -> https://leetcode.com/problems/valid-palindrome/description/
 
-
-
 const check = (s) => {
 
     let left = 0;
